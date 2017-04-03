@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request, Response
 import boto3
+import botocore.exceptions
 import os
 import StringIO
 import email
@@ -117,8 +118,14 @@ def create_app(config_path=None):
 
     @app.route('/list')
     def list():
-        emails = app.email_reader.get_email_list()
-        return render_template('list.html', emails=emails)
+        try:
+            emails = app.email_reader.get_email_list()
+            return render_template('list.html', emails=emails)
+        except botocore.exceptions.ClientError as ex:
+            return render_template('credentials_error.html', exception=ex)
+        except botocore.exceptions.NoCredentialsError as ex:
+            return render_template('credentials_error.html', exception=ex)
+
 
     @app.route('/email')
     def email():

@@ -2,7 +2,11 @@ ses-s3-inbox
 =====
 
 Sometimes, you just wanna pump some emails from SES to S3.  But what good is a pile of MIME files?
-This webapp helps make reading that pile a little easier
+This webapp helps make reading that pile a little easier.
+
+Purpose
+-----
+So you've got a shiny new domain, and you want a lightweight mail box.  So you think, "Ah!  SES Receipt Rules!"  
 
 SES Setup
 -----

@@ -7,7 +7,6 @@ import tempfile
 from ses_s3_inbox import create_app
 
 class FlaskrTestCase(unittest.TestCase):
-
     def setUp(self):
         TEST_CONFIG = {
             "BUCKET": "test-bucket",

@@ -2,8 +2,13 @@ from flask import Flask, jsonify, render_template, request, Response
 import boto3
 import botocore.exceptions
 import os
-import StringIO
+
 import email
+
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 
 try:
     import yaml
@@ -77,7 +82,7 @@ class EmailReader:
 
     def get_email(self, key):
         # TODO: build cacheing in here
-        output = StringIO.StringIO()
+        output = StringIO()
         object = self.bucket.download_fileobj(key, output)
         output.seek(0)
 

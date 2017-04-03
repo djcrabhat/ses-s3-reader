@@ -1,9 +1,6 @@
 ses-s3-inbox
 =====
 
-![Message Screenshot](/docs/email.png?raw=true)
-
-
 Sometimes, you just wanna pump some emails from SES to S3.  But what good is a pile of MIME files?
 This webapp helps make reading that pile a little easier
 
@@ -40,3 +37,17 @@ To run:
 docker run --rm -ti -p 5000:5000 -e BUCKET=MY_BUCKET -e OBJECT_PREFIX=email/ ses-s3-reader
 
 ```
+
+Current Limitations:
+-----
+* The To, From, Date data on the Inbox page doesn't fill until you look at a message.
+  * TODO: Have some sorta background job fetch message metadata in the background
+* No message meta-data is persisted after a restart
+* There should probably be a cacheing layer to save calls to S3
+* The MIME parsing is pretty bare-bones, wouldn't be suprised if it chokes
+
+
+Screenshots
+-----
+
+![Message Screenshot](/docs/email.png?raw=true)

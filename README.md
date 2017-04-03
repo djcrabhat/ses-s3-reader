@@ -7,6 +7,8 @@ This webapp helps make reading that pile a little easier.
 Purpose
 -----
 So you've got a shiny new domain, and you want a lightweight mail box.  So you think, "Ah!  SES Receipt Rules!"  
+But what do you _do_ with all these S3 objects with SMTP ids for object names?  If you were like me, you probably 
+downloaded each one, opened 'em in Sublime until you found that one message you were trying to find.  Well no longer!
 
 SES Setup
 -----

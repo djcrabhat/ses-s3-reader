@@ -89,7 +89,7 @@ class EmailReader:
 
 
 
-def create_app(config_path=None):
+def create_app(config_path=None, config_dict=None):
     app = Flask(__name__)
 
     # load config from file
@@ -108,6 +108,9 @@ def create_app(config_path=None):
     for x in ["BUCKET", "OBJECT_PREFIX", "SERVER_NAME"]:
         if x in os.environ:
             app.config[x] = os.environ[x]
+
+    if config_dict:
+        app.config.from_mapping(config_dict)
 
 
     app.email_reader = EmailReader(app.config)

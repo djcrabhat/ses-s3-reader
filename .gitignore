@@ -1,3 +1,4 @@
 config.yaml
 _venv/
 **.pyc
+.idea/

@@ -17,13 +17,12 @@
     <h3>{{email['subject']}}</h3>
 </div>
 
-<div>
-    {% for payload in email.get_payload() %}
+<div>{% for payload in email.get_payload() %}
         {% set t = payload.get_content_type() %}
-    <div class="card email-card" style="margin-bottom:5px">
+    <div class="card email-card w-100" style="margin-bottom:5px">
         {% if t == "text/plain" %}
             <div class="card-block">
-                <pre>{{payload.get_payload()}}</pre>
+                <pre class="">{{payload.get_payload()}}</pre>
             </div>
         {% elif t == "text/html" %}
             <div class="card-block">

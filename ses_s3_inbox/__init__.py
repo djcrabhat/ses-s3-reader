@@ -94,8 +94,9 @@ def create_app(config_path=None):
     # load config from file
 
     if config_path and HAS_YAML:
-        app.logger.debug("loading %s"%config_path)
         path = os.path.join(os.getcwd(), config_path)
+        app.logger.debug("loading %s" % path)
+        c = None
         if os.path.exists(path):
             with open(path) as f:
                 c = yaml.load(f)

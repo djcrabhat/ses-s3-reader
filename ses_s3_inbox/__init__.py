@@ -91,9 +91,6 @@ class EmailReader:
 def create_app(config_path=None):
     app = Flask(__name__)
 
-    # default server
-    app.config['SERVER_NAME'] = "0.0.0.0:5000"
-    
     # load config from file
 
     if config_path and HAS_YAML:

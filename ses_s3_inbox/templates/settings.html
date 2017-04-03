@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active">Settings</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+{% if message %}
+<div class="alert alert-success" role="alert">{{message}}</div>
+{% endif %}
+<dl class="dl-horizontal">
+    <dt>Bucket</dt>
+    <dd>{{settings['bucket']}}</dd>
+
+    <dt>Object Prefix</dt>
+    <dd>{{settings['prefix']}}</dd>
+    <dt>Items In Cache</dt>
+    <dd>{{settings['items_in_cache']}}</dd>
+</dl>
+
+<form action="/settings/cache/clear" method="post">
+    <button type="submit" class="btn">Clear Cache</button>
+</form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/list">Inbox</a></li>
+    <li class="breadcrumb-item active">{{email["subject"]}}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div>
+    <span>From {{email['from']}}</span><br/>
+    <span>to {{email['to']}}</span><br/>
+    <span>Sent {{email['date']}}</span>
+    <h3>{{email['subject']}}</h3>
+</div>
+
+<div class="card" style="margin-bottom:5px">
+    <div class="card-body">
+        <pre>{{email.get_payload()}}</pre>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">{{email.get_content_type()}}</small>
+        <a href="/email/0?key={{key}}">Link</a>
+    </div>
+</div>
+
+<div>
+
+    <a class="btn btn-primary btn-sm" role="button" data-toggle="collapse" href="#headersContainer" aria-expanded="false"
+       aria-controls="headersContainer">View Headers <span class="caret"></span>
+    </a>
+
+    <div id="headersContainer" class="collapse">
+        <div class="card card-block">
+            <dl>
+            {% for k,v in email.items() %}
+            <dt>{{k}}</dt>
+            <dd>{{v}}</dd>
+            {% endfor %}
+        </dl>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

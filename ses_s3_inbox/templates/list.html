@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active">Inbox</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for e in emails %}
+    <tr>
+        <td><a href="/email?key={{e.key}}">{{e.nice_key}}</a></td>
+        <td>{{e.from}}</td>
+        <td>{{e.to}}</td>
+        <td>{{e.date}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

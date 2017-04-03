@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/list">Inbox</a></li>
+    <li class="breadcrumb-item active">{{email["subject"]}}</li>
+</ol>
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <span>From {{email['from']}}</span><br/>
+    <span>to {{email['to']}}</span><br/>
+    <span>Sent {{email['date']}}</span>
+    <h3>{{email['subject']}}</h3>
+</div>
+
+<div>
+    {% for payload in email.get_payload() %}
+        {% set t = payload.get_content_type() %}
+    <div class="card email-card" style="margin-bottom:5px">
+        {% if t == "text/plain" %}
+            <div class="card-block">
+                <pre>{{payload.get_payload()}}</pre>
+            </div>
+        {% elif t == "text/html" %}
+            <div class="card-block">
+                <div class="html-container">{{payload.get_payload() | safe}}</div>
+            </div>
+        {% elif t == "image/png" %}
+            <div class="card-block">
+                <a href="/email/{{loop.index0}}?key={{key}}" class="thumbnail"/>
+                    <img src="/email/{{loop.index0}}?key={{key}}" />
+                </a>
+            </div>
+        {% else %}
+            <div class="card-block">
+            ???
+            </div>
+        {% endif %}
+        <div class="card-footer">
+          <small class="text-muted">{{t}}</small>
+            <a href="/email/{{loop.index0}}?key={{key}}">Link</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<div>
+
+    <a class="btn btn-primary btn-sm dropdown-toggle" role="button" data-toggle="collapse" href="#headersContainer" aria-expanded="false"
+       aria-controls="headersContainer">View Headers
+    </a>
+
+    <div id="headersContainer" class="collapse">
+        <div class="card card-block">
+            <dl>
+            {% for k,v in email.items() %}
+            <dt>{{k}}</dt>
+            <dd>{{v}}</dd>
+            {% endfor %}
+        </dl>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
